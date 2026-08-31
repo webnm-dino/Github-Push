@@ -1,0 +1,79 @@
+<!-- DM3014 Interactive Devices, Ashley Hi 2026
+  -- Week 3 - Net Art
+  -- Assignment Example
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sculpture As 100 Hyperlinks</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+</head>
+<body>
+<script>
+  // ------------------------------------------------------------------
+  // EDIT ME
+  // One object per hyperlink on the page:
+  //   x, y   -> where it sits on the page, in pixel coordinates
+  //   label  -> the clickable text
+  //   url    -> where it links to
+  //   w, h   -> (optional) popup window size for this link only.
+  //             leave them out and it uses defaultWidth/defaultHeight below
+  //
+  // To add a link: copy any line, change the values, add a comma.
+  // To remove a link: delete its line.
+ 
+  let links = [
+  {x:0, y:0, label:"I want to" },  
+  { x: 100, y: 100, label: "Obtain RAM", url: "https://pcpartpicker.com/trends/price/memory/", w: 500, h: 400 },
+  { x: 100, y: 120, label: "get Accessible tech", url: "https://forums.raspberrypi.com/viewtopic.php?t=397523" },
+  {x: 200, y:200, label: "See All Evil", url:"https://www.cnet.com/tech/services-and-software/best-streaming-service/"},
+  {x: 300, y:200, label: "See No Evil", url:"https://adguard.com/en/welcome.html"},
+  {x: 300, y:300, label:"Do All Evil", url:"https://techcommunity.microsoft.com/discussions/windows11/telemetry-in-windows-11-what-it-is-and-why-it-matters-for-your-pc/4473988"},
+  {x: 400, y:300, label:"Do No Evil", url:"https://www.obdev.at/products/littlesnitch" },
+  {x:1000, y:290, label:"Hear All Evil", url:"https://www.reddit.com/r/privacy/comments/1fsri2c/my_wakeup_call_how_i_discovered_my_smart_tv_was/"},
+  {x:1150, y:290, label:"Hear No Evil", url:"https://www.obdev.at/products/microsnitch/index.html "},
+  {x:300, y:400, label:"Speak All Evil", url:"https://www.reddit.com/r/privacy/comments/1r5lf9i/whats_a_good_argument_against_i_have_nothing_to/"},
+  {x:450, y:400, label:"Speak No Evil", url:"https://tuta.com"},
+  {x:500, y:800, label:"Own All Evil", url:"https://www.cnet.com/tech/services-and-software/best-streaming-service/"},
+  {x:400, y:800, label:"Own No Evil", url:"https://www.youtube.com/watch?v=cMVcclMkp7g"},
+  {x:750, y:200, label:"Partner No Evil", url:"https://ollama.com"},
+  {x:900, y:200, label:"Partner All Evil", url:"https://www.theguardian.com/commentisfree/2026/aug/05/anthropic-ai-destroying-books"}
+
+
+
+
+
+  
+  ];
+  // ------------------------------------------------------------------
+  
+  // popup size used for any link that doesn't set its own w/h
+  let defaultWidth = 500;
+  let defaultHeight = 600;
+
+  function setup() {
+    noCanvas(); // this page only places links, so we don't need a canvas
+    for (let i = 0; i < links.length; i++) {
+      let link = links[i];
+      let a = createA('javascript:void(0)', link.label);
+      a.position(link.x, link.y);
+      a.mousePressed(() => openPopup(link));
+    }
+  }
+
+  // opens a link in its own small popup window
+  function openPopup(link) {
+    let w = link.w || defaultWidth;
+    let h = link.h || defaultHeight;
+    window.open(
+      link.url,
+      '_blank',
+      `width=${w},height=${h},left=100,top=50,resizable=yes,scrollbars=yes`
+    );
+  }
+
+</script>
+</body>
+</html>
